@@ -1,0 +1,71 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >-->
+<!--<mapper namespace="com.example.multitable.service.user.UserService">-->
+<!--    <sql id="user-column">-->
+<!--        <trim>id, "name", company_id</trim>-->
+<!--    </sql>-->
+
+<!--    <sql id="user-column-prefix">-->
+<!--        <trim>-->
+<!--            ${alias}.id AS ${prefix}id,-->
+<!--            ${alias}.name AS ${prefix}name,-->
+<!--            ${alias}.company_id AS ${prefix}company_id,-->
+<!--        </trim>-->
+<!--    </sql>-->
+
+<!--    <sql id="company-column-prefix">-->
+<!--        <trim>-->
+<!--            ${alias}.id AS ${prefix}id,-->
+<!--            ${alias}.name AS ${prefix}name,-->
+<!--        </trim>-->
+<!--    </sql>-->
+
+<!--    <resultMap id="UserMap" type="com.example.multitable.model.User">-->
+<!--        <id property="id" column="id" jdbcType="LONG"/>-->
+<!--        <result property="name" column="name" jdbcType="VARCHAR"/>-->
+
+<!--        <association property="company" javaType="com.example.multitable.model.Company" column="company_id">-->
+<!--            <id property="id" column="id" jdbcType="LONG"/>-->
+<!--            <result property="companyName" column="name" jdbcType="VARCHAR"/>-->
+<!--        </association>-->
+
+<!--        <collection property="accounts" ofType="com.example.multitable.model.Account" column="user_id">-->
+<!--            <id property="id" column="id" javaType="LONG"/>-->
+<!--            <result property="accountName" column="name" jdbcType="VARCHAR"/>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <resultMap id="CompanyMap" type="com.example.multitable.model.Company">-->
+<!--        <id property="id" column="id" jdbcType="LONG"/>-->
+<!--        <result property="companyName" column="name" jdbcType="VARCHAR"/>-->
+<!--    </resultMap>-->
+
+<!--    <resultMap id="UserMap2" type="com.example.multitable.model.User">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <collection property="company" column="company_id" notNullColumn="company_id"-->
+<!--                    ofType="com.example.multitable.model.Company" columnPrefix="co_"-->
+<!--                    resultMap="CompanyMap"/>-->
+<!--    </resultMap>-->
+
+<!--    <select id="findAll" resultMap="UserMap">-->
+<!--        select u.id, u.name, c.id id, c.name name, a.id id, a.name name-->
+<!--        from user u left join company c on u.company_id = c.id-->
+<!--        left join account a on u.id = a.user_id-->
+<!--    </select>-->
+
+<!--    <select id="findAllTest" resultMap="UserMap2">-->
+<!--        select-->
+<!--        <include refid="user-column-prefix">-->
+<!--            <property name="alias" value="u"/>-->
+<!--            <property name="prefix" value="u_"/>-->
+<!--        </include>-->
+<!--        ,-->
+<!--        <include refid="company-column-prefix">-->
+<!--            <property name="alias" value="co"/>-->
+<!--            <property name="prefix" value="co_"/>-->
+<!--        </include>-->
+<!--        from "user" left join company co on company_id = c.id-->
+
+<!--    </select>-->
+<!--</mapper>-->
