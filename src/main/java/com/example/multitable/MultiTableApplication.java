@@ -1,6 +1,6 @@
 package com.example.multitable;
 
-import com.example.multitable.service.user.UserService;
+//import com.example.multitable.service.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

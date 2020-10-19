@@ -1,26 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-
-<mapper namespace="com.example.multitable.dao.UserDAO">
+<mapper namespace="com.example.multitable.service.user.UserService">
     <resultMap id="UserMap" type="com.example.multitable.model.User">
-        <id property="id" column="id" jdbcType="LONG"/>
+        <id column="id" jdbcType="INTEGER" property="id"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
-
+        <!--Package mapping company table data, user table and company table 1 to 1 relationship, configure 1-to-1 mapping
+                        Association: used to configure a 1-to-1 mapping
+                        Property property: the property name of the company object in the user object
+                        Attribute javaType: java object type of the company attribute
+                        Attribute column: foreign key in the user table refers to the company table
+       -->
         <association property="company" javaType="com.example.multitable.model.Company" column="company_id">
-            <id property="id" column="companyid" jdbcType="LONG"/>
-            <result property="companyName" column="companyname" jdbcType="VARCHAR"/>
+            <id property="id" column="companyid"></id>
+            <result property="companyName" column="companyname"></result>
         </association>
-
+        <!--Configure 1-to-many relationship mapping
+                Property: the property name of List<Account> in user
+                ofType: java type of the current account table
+                Column: foreign key
+-->
         <collection property="accounts" ofType="com.example.multitable.model.Account" column="user_id">
-            <id property="id" column="accountid" javaType="LONG"/>
-            <result property="accountName" column="accountname" jdbcType="VARCHAR"/>
+            <id property="id" column="accountid"></id>
+            <result property="accountName" column="accountname"></result>
         </collection>
     </resultMap>
-    <select id="getAllUsers" resultMap="UserMap">
-        select u.id, u.name, c.id companyid, c.name companyname, a.id accountid, a.name accountname
-        from user u left join company c on u.company_id = c.id
-        left join account a on u.id = a.user_id
+
+    <select id="findAll" resultMap="UserMap">
+       select * from "user"
     </select>
-    <select id="getUserWithAccount" resultType="com.example.multitable.model.User"></select>
-    <select id="getUserWithCompany" resultType="com.example.multitable.model.User"></select>
+
 </mapper>
